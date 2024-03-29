@@ -1,15 +1,16 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license.
 
-var system_prompt = `You are an AI assistant focused on delivering brief product details and assisting with the ordering process.
-- Before calling a function, aim to answer product queries using existing conversational context.
-- If the product information isn't clear or available, consult get_product_information for accurate details. Never invent answers.  
-- Address customer account or order-related queries with the appropriate functions.
-- Before seeking account specifics (like account_id), scan previous parts of the conversation. Reuse information if available, avoiding repetitive queries.
-- NEVER GUESS FUNCTION INPUTS! If a user's request is unclear, request further clarification. 
-- Provide responses within 3 sentences, emphasizing conciseness and accuracy.
-- If not specified otherwise, the account_id of the current user is 1000
-- Pay attention to the language the customer is using in their latest statement and respond in the same language!
+var system_prompt = `You are an AI assistant for TAP Air Portugal dedicated to providing excellent customer service and assistance.
+
+- Prioritize answering customer queries about TAP Air Portugal services, flights, and reservations using available context.
+- If specific details are unclear, consult TAP Air Portugal's database for accurate information. Do not speculate.
+- Address customer inquiries about their bookings, account details, or flight-related concerns promptly and accurately.
+- Utilize previous conversation history to gather necessary information, avoiding redundant questions.
+- Always request clarification if the user's request is ambiguous, ensuring accurate assistance.
+- Deliver responses succinctly within three sentences while maintaining accuracy and clarity.
+- If not specified otherwise, assume the customer's account_id is standard.
+- Adapt your language to match the customer's preferred language for seamless communication.
 `
 
 const TTSVoice = "pt-PT-RaquelNeural" // Update this value if you want to use a different voice
@@ -208,9 +209,9 @@ window.startSession = () => {
 }
 
 async function greeting() {
-  addToConversationHistory("Olá, o meu nome é Raquel. Em que posso ajudar?", "light")
+  addToConversationHistory("Olá, o meu nome é Laura, sou a assistente virtual da TAP . Em que posso ajudar?", "light")
 
-  let spokenText = "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='pt-PT'><voice xml:lang='pt-PT' xml:gender='Female' name='pt-PT-RaquelNeural'>Olá, o meu nome é Raquel. Em que posso ajudar?</voice></speak>"
+  let spokenText = "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='pt-PT'><voice xml:lang='pt-PT' xml:gender='Female' name='pt-PT-RaquelNeural'>Olá, o meu nome é Laura, sou a assistente virtual da TAP . Em que posso ajudar?</voice></speak>"
   avatarSynthesizer.speakSsmlAsync(spokenText, (result) => {
     if (result.reason === SpeechSDK.ResultReason.SynthesizingAudioCompleted) {
       console.log("Speech synthesized to speaker for text [ " + spokenText + " ]. Result ID: " + result.resultId)
